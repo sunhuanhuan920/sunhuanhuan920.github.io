@@ -1,0 +1,649 @@
+class matrixRain {
+    constructor(x, y, speed, first)
+    {
+        this.x = x;
+        this.y = y;
+        this.value;
+        this.speed = speed;
+        this.delay = round(random(2, 20));
+        this.first = first;
+    }
+
+    setToRandomSymbol()
+    {
+        if(frameCount % this.delay == 0)
+        {
+            // Convert Unicode values into characters
+            this.value = String.fromCharCode(0x3040 + round(random(0, 96)));
+        }
+    }
+
+    rain()
+    {
+        this.y = (this.y >= height) ? 0 : this.y += this.speed;
+    }
+}
+
+class matrixRains {
+    constructor()
+    {
+        this.symbols = [];
+        this.numberOfSymbols = round(random(5, 30));
+        this.speed = round(random(5, 15));
+    }
+
+    GenerateSymbols(x, y)
+    {
+        var first = round(random(0, 1)) == 1;
+        for(var i = 0; i <= this.numberOfSymbols; i++)
+        {
+            var symbol = new matrixRain(x, y, this.speed, first);
+            symbol.setToRandomSymbol();
+            this.symbols.push(symbol);
+            y -= symbolSize;
+            first = false;
+        }
+    }
+
+    render()
+    {
+        this.symbols.forEach(function(symbol)
+        {
+            if(symbol.first)
+            {
+                fill(200, 255, 200);
+            }
+            else
+            {
+                if(symbol.speed <= 8)
+                {
+                    fill(0, 150, 0);
+                }
+                else
+                {
+                    fill(0, 255, 70);
+                }
+            }
+            text(symbol.value, symbol.x, symbol.y);
+            symbol.rain();
+            symbol.setToRandomSymbol();
+        });
+    }
+}
+
+var symbolSize = 20;
+var streams = [];
+
+function setup()
+{
+    createCanvas(window.innerWidth, window.innerHeight);
+    background(0);
+
+    var x = 0;
+    for(var i = 0; i <= width / symbolSize; i++)
+    {
+        var stream = new matrixRains();
+        stream.GenerateSymbols(x, random(-500, 0));
+        streams.push(stream);
+        x += symbolSize;
+    }
+
+    textSize(symbolSize);
+}
+
+function draw()
+{
+    background(0, 150);
+    streams.forEach(function(stream)
+    {
+        stream.render();
+    });
+}
+
+
+=====================================================================
+
+
+const canvas = document.getElementById("preview");
+const fileInput = document.querySelector("input[type='file'");
+
+const context = canvas.getContext("2d");
+
+fileInput.onchange = e => {
+  // just handling single file upload
+  const file = e.target.files[0];
+
+  const reader = new FileReader();
+  reader.onload = event => {
+    const image = new Image();
+    image.onload = () => {
+      canvas.width = image.width;
+      canvas.height = image.height;
+
+      context.drawImage(image, 0, 0);
+      convertToGrayScales(context, canvas.width, canvas.height);
+      drawAscii(convertToGrayScales(context, canvas.width, canvas.height), canvas.width);
+    };
+
+    image.src = event.target.result;
+  };
+
+  reader.readAsDataURL(file);
+};
+
+const toGrayScale = (r, g, b) => 0.21 * r + 0.72 * g + 0.07 * b;
+
+const convertToGrayScales = (context, width, height) => {
+  const imageData = context.getImageData(0, 0, width, height);
+
+  const grayScales = [];
+
+  for (let i = 0; i < imageData.data.length; i += 4) {
+    const r = imageData.data[i];
+    const g = imageData.data[i + 1];
+    const b = imageData.data[i + 2];
+
+    const grayScale = toGrayScale(r, g, b);
+    imageData.data[i] = imageData.data[i + 1] = imageData.data[
+      i + 2
+    ] = grayScale;
+
+    grayScales.push(grayScale);
+  }
+
+  context.putImageData(imageData, 0, 0);
+
+  return grayScales;
+};
+
+const grayRamp =
+  "$@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/|()1{}[]?-_+~<>i!lI;:,\"^`'. ";
+const rampLength = grayRamp.length;
+
+// the grayScale value is an integer ranging from 0 (black) to 255 (white)
+const getCharacterForGrayScale = grayScale =>
+  grayRamp[Math.ceil(((rampLength - 1) * grayScale) / 255)];
+
+const asciiImage = document.querySelector("pre#ascii");
+
+const drawAscii = (grayScales, width) => {
+    const ascii = grayScales.reduce((asciiImage, grayScale, index) => {
+      let nextChars = getCharacterForGrayScale(grayScale);
+  
+      if ((index + 1) % width === 0) {
+        nextChars += "\n";
+      }
+  
+      return asciiImage + nextChars;
+    }, "");
+  
+    asciiImage.textContent = ascii;
+  };
+
+=====================================================================
+
+  <a href="Rain.html">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Make it Rain
+    </a>
+    <a href="Ascii.html">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        Ascii Art
+    </a>
+
+    =====================================================================
+
+    *
+{
+    margin: 0;
+    padding: 0;
+    font-family: consolas;
+    box-sizing: border-box;
+}
+
+body
+{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: black;
+}
+
+a
+{
+    position: relative;
+    display: inline-block;
+    padding: 25px 30px;
+    margin: 40px 40px;
+    color: #03e9f4;
+    font-size: 24px;
+    text-decoration: none;
+    text-transform: uppercase;
+    overflow: hidden;
+    transition: 0.5s;
+    letter-spacing: 4px;
+    -webkit-box-reflect: below 10px linear-gradient(transparent, #0005);
+}
+
+a:nth-child(1)
+{
+    filter: hue-rotate(290deg);
+}
+
+a:nth-child(2)
+{
+    filter: hue-rotate(110deg);
+}
+
+a:hover
+{
+    background: #03e9f4;
+    color: black;
+    box-shadow: 0 0 5px #03e9f4,
+                0 0 25px #03e9f4,
+                0 0 50px #03e9f4,
+                0 0 200px #03e9f4;
+}
+
+a span
+{
+    position: absolute;
+    display: block
+}
+
+a span:nth-child(1)
+{
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to right, transparent, #03e9f4);
+    animation-name: animate1;
+    animation-duration: 1s;
+    animation-direction: linear;
+    animation-iteration-count: infinite;
+}
+@keyframes animate1
+{
+    0%
+    {
+        left: -100%;
+    }
+    100%
+    {
+        left: 100%;
+    }
+}
+
+a span:nth-child(2)
+{
+    top: -100%;
+    right: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, #03e9f4);
+    animation-name: animate2;
+    animation-duration: 1s;
+    animation-direction: linear;
+    animation-iteration-count: infinite;
+    animation-delay: 0.25s;
+}
+@keyframes animate2
+{
+    0%
+    {
+        top: -100%;
+    }
+    100%
+    {
+        top: 100%;
+    }
+}
+
+a span:nth-child(3)
+{
+    right: 100%;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(to left, transparent, #03e9f4);
+    animation-name: animate3;
+    animation-duration: 1s;
+    animation-direction: linear;
+    animation-iteration-count: infinite;
+    animation-delay: 0.5s;
+}
+@keyframes animate3
+{
+    0%
+    {
+        right: -100%;
+    }
+    100%
+    {
+        right: 100%;
+    }
+}
+
+a span:nth-child(4)
+{
+    bottom: 100%;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: linear-gradient(to top, transparent, #03e9f4);
+    animation-name: animate4;
+    animation-duration: 1s;
+    animation-direction: linear;
+    animation-iteration-count: infinite;
+    animation-delay: 0.75s;
+}
+@keyframes animate4
+{
+    0%
+    {
+        bottom: -100%;
+    }
+    100%
+    {
+        bottom: 100%;
+    }
+}
+
+=====================================================================
+
+<div class="gallery">
+        <div style="--i:1"><a href="Rain.html"><img src="images/matrixrain.jpg"></a></div>
+        <div style="--i:2"><a href="Ascii.html"><img src="images/ascii.jpeg"></a></div>
+</div>
+
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #000;
+}
+.gallery
+{
+    position: relative;
+    width: 200px;
+    height: 200px;
+    /* specify how nested elements are rendered in 3D space*/
+    transform-style: preserve-3d; 
+    animation-name: animate;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+@keyframes animate
+{
+    0%
+    {
+        /*perspective defines how far the object is away from the user*/
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100%
+    {
+        transform: perspective(1000px) rotateY(360deg);
+    }
+}
+.gallery:hover
+{
+    animation-play-state: paused;
+    cursor: pointer;
+}
+.gallery div
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    /*move the images outward from the screen toward the user*/
+    transform: rotateY(calc(var(--i) * 45deg)) translateZ(400px);
+    /*-webkit-box-reflect: below 2px linear-gradient(transparent, rgba(0, 0, 0, 0.5));*/
+}
+.gallery div a
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+.gallery div a img
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    -webkit-box-reflect: below 2px linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+}
+.gallery div a img:hover
+{
+    transform: scale(1.5);
+    transition: all 0.8s;
+}
+
+=====================================================================
+/*
+ *  3D Rotating Image Gallery with card image link (HTML)
+ */
+
+<div class="gallery">
+        <!--Matrix Rain-->
+        <div class="showbox" style="--i:1">
+            <div class="imglink">
+                <a href="Rain.html"><img src="images/matrixrain.jpg"></a>
+            </div>
+            <div class="content">
+                <h2>Matrix Rain</h2>
+            </div>
+        </div>
+        <!--Ascii image converter-->
+        <div class="showbox" style="--i:2">
+            <div class="imglink">
+                <a href="Ascii.html"><img src="images/ascii.jpeg"></a>
+            </div>
+            <div class="content">
+                <h2>Ascii Converter</h2>
+            </div>
+        </div>
+        <!--Interesting stuff-->
+        <div class="showbox" style="--i:3">
+            <div class="imglink">
+                <a href="#"><img src="images/gakki.png"></a>
+            </div>
+            <div class="content">
+                <h2>Coming Soon...</h2>
+            </div>
+        </div>
+        <!--Interesting stuff-->
+        <div class="showbox" style="--i:4">
+            <div class="imglink">
+                <a href="#"><img src="images/gakki2.png"></a>
+            </div>
+            <div class="content">
+                <h2>Coming Soon...</h2>
+            </div>
+        </div>
+    </div>
+
+=====================================================================
+/*
+ *  3D Rotating Image Gallery with card image link (CSS)
+ */
+
+@font-face
+{
+    font-family: arcade;
+    src: url(fonts/PressStart2P-Regular.ttf);
+    font-style: normal;
+    font-weight: 100;
+}
+*
+{
+    margin: 0;
+    padding: 0;
+    font-family: arcade;
+    box-sizing: border-box;
+}
+body
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: #010615;
+}
+.gallery
+{
+    position: relative;
+    width: 300px;
+    height: 300px;
+    /* specify how nested elements are rendered in 3D space*/
+    transform-style: preserve-3d; 
+    animation-name: animate;
+    animation-duration: 20s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+}
+@keyframes animate
+{
+    0%
+    {
+        /*perspective defines how far the object is away from the user*/
+        transform: perspective(1000px) rotateY(0deg);
+    }
+    100%
+    {
+        transform: perspective(1000px) rotateY(360deg);
+    }
+}
+.gallery:hover
+{
+    animation-play-state: paused;
+    cursor: pointer;
+}
+.gallery .showbox
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    /*move the images outward from the screen toward the user*/
+    transform: rotateY(calc(var(--i) * 90deg)) translateZ(400px);
+    /*-webkit-box-reflect: below 2px linear-gradient(transparent, rgba(0, 0, 0, 0.5));*/
+}
+/*.gallery .showbox .imglink a img
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}*/
+.showbox
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 40px;
+    transition: 0.5s;
+}
+.showbox .imglink
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+.showbox .imglink img
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    /*max-width: 100%;*/
+    width: 100%;
+    height: 50%;
+    transition: 0.5s;
+    -webkit-box-reflect: below 2px linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+}
+.showbox:hover .imglink img
+{
+    transform: scale(2);
+}
+.showbox .content
+{
+    position: absolute;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 0.5s;
+}
+.showbox:hover .content
+{
+    opacity: 1;
+}
+.showbox .content h2
+{
+    font-size: 20px;
+    color: #fff;
+}
+@media (max-width: 900px)
+{
+    .gallery
+    {
+        width: 200px;
+        height: 200px;
+    }
+    .gallery .showbox
+    {
+        transform: rotateY(calc(var(--i) * 90deg)) translateZ(150px);
+    }
+
+    .showbox:hover .imglink img
+    {
+        transform: scale(1.5);
+    }
+    .showbox .content h2
+    {
+        font-size: 15px;
+    }
+}

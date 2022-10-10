@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Asciify Image</title>
+    <style>
+        body
+        {
+            margin: 0;
+            padding: 0;
+            background: rgb(1, 1, 68);
+        }
+        pre
+        {
+            font-size: 2px;
+            font-weight: bolder;
+            font-family: monospace;
+            color: white;
+        }
+        h1
+        {
+            color: white;
+        }
+        h2
+        {
+            color: white;
+        }
+        p
+        {
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h1>Image to Ascii character converter</h1>
+    <h2>Choose an Image from your device</h2>
+    <p>
+        <input type="file" name="Image">
+    </p>
+    <canvas id="preview"></canvas>
+    <!--text in a <pre> element is displayed in a fixed width font-->
+    <!--text preserves both spaces and line breaks-->
+    <!--text will be displayed exactly as written in the HTML source code-->
+    <pre id="asciiImage"></pre>
+    
+    <script src="Asciify.js"></script>
+</body>
+</html>

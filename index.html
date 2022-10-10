@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zhenhuan Sun</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="icon" href="icon.gif">
+</head>
+<body>
+    <header>
+        <h1 class="big-title translate" data-speed="0.5">Hello World.</h1>
+        <img src="Layers/mountain.png" class="mountain translate" data-speed="0">
+        <img src="Layers/sky.png" class="sky translate" data-speed="1">
+    </header>
+    <section class="bio">
+        <div class="shadow"></div>
+        <div class="container">
+            <div class="imgContainer opacity">
+                <img src="images/avatar.png" alt="">
+            </div>
+            <div class="content opacity">
+                <h3 class="title">
+                    About <span>me</span>
+                    <div class="border"></div>
+                </h3>
+                <ul>
+                    <li><a href="mailto:sunsteven11@gmail.com"><i class="fa fa-envelope" aria-hidden="true"></i></a></li>
+                    <li><a href="https://drive.google.com/file/d/1Gd54zjUfSLenuQUVnXeKdQyyxCnHwlA_/view?usp=sharing"><i class="fa fa-file-text" aria-hidden="true"></i></a></li>
+                    <li><a href="https://www.facebook.com/zhenhuan.sun.549"><i class="fa fa-facebook-official" aria-hidden="true"></i></a></li>
+                </ul>
+                <p class="text">
+                    My name is Zhenhuan Sun. I'm 
+                    a student studies Computer Engineering at McMaster University 
+                    who is obsessed with japanese anime and arcade game.
+                    A proletarian striver who wants to accomplish something great.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section class="playground">
+        <div class="transition">
+            <h3 class="playground-title">
+                playground.
+            </h3>
+            <div class="clouds">
+                <img src="images/cloud1.png" style="--i:1">
+                <img src="images/cloud2.png" style="--i:2">
+                <img src="images/cloud3.png" style="--i:3">
+                <img src="images/cloud5.png" style="--i:4">
+                <img src="images/cloud1.png" style="--i:8">
+                <img src="images/cloud2.png" style="--i:7">
+                <img src="images/cloud3.png" style="--i:6">
+                <img src="images/cloud5.png" style="--i:5">
+            </div>
+        </div>
+        <div class="playground-container">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="showbox">
+                            <div class="imgLink">
+                                <a href="Rain.html"><img src="images/matrixrain.jpg"></a>
+                            </div>
+                            <div class="content">
+                                <h2>Matrix Rain</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="showbox">
+                            <div class="imgLink">
+                                <a href="Ascii.html"><img src="images/ascii.jpeg"></a>
+                            </div>
+                            <div class="content">
+                                <h2>Ascii Converter</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="showbox">
+                            <div class="imgLink">
+                                <a href="#"><img src="images/coming_soon.jpg"></a>
+                            </div>
+                            <div class="content">
+                                <h2>Coming Soon...</h2>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="showbox">
+                            <div class="imgLink">
+                                <a href="#"><img src="images/coming_soon.jpg"></a>
+                            </div>
+                            <div class="content">
+                                <h2>Coming Soon...</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.5/js/swiper.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+          effect: 'coverflow',
+          grabCursor: true,
+          centeredSlides: true,
+          slidesPerView: 'auto',
+          coverflowEffect: {
+            rotate: 50,
+            stretch: 0,
+            depth: 200,
+            modifier: 1,
+            slideShadows: true,
+          },
+          loop: false,
+          autoplay: {
+              delay: 1000,
+              disableOnInteraction: true,
+          },
+          /*pagination: {
+            el: '.swiper-pagination',
+          },*/
+        });
+    </script>
+    <script>
+        //$(selector)
+        $(document).ready(function(){
+            var mySwiper = document.querySelector(".swiper-container").swiper;
+            $(".showbox").mouseenter(function(){
+                mySwiper.autoplay.stop();
+                console.log("slider stopped");
+            });
+            $(".showbox").mouseleave(function(){
+                mySwiper.autoplay.start();
+                console.log("slider started again")
+            });
+        })
+    </script>
+    <script src="translate.js"></script>
+</body>
+</html>

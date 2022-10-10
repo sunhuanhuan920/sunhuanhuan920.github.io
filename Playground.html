@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.0.5/js/swiper.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="stylePlayground.css">
+</head>
+<body>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide">
+                <!--Matrix Rain-->
+                <div class="showbox">
+                    <div class="imglink">
+                        <a href="Rain.html"><img src="images/matrixrain.jpg"></a>
+                    </div>
+                    <div class="content">
+                        <h2>Matrix Rain</h2>
+                    </div>
+                </div>
+          </div>
+          <div class="swiper-slide">
+                <!--Ascii image converter-->
+                <div class="showbox">
+                    <div class="imglink">
+                        <a href="Ascii.html"><img src="images/ascii.jpeg"></a>
+                    </div>
+                    <div class="content">
+                        <h2>Ascii Converter</h2>
+                    </div>
+                </div>
+          </div>
+          <div class="swiper-slide">
+                <!--Interesting stuff-->
+                <div class="showbox">
+                    <div class="imglink">
+                        <a href="#"><img src="images/gakki.png"></a>
+                    </div>
+                    <div class="content">
+                        <h2>Coming Soon...</h2>
+                    </div>
+                </div>
+          </div>
+          <div class="swiper-slide">
+                <!--Interesting stuff-->
+                <div class="showbox">
+                    <div class="imglink">
+                        <a href="#"><img src="images/gakki2.png"></a>
+                    </div>
+                    <div class="content">
+                        <h2>Coming Soon...</h2>
+                    </div>
+                </div>
+          </div>
+          <div class="swiper-slide">
+            <!--Interesting stuff-->
+            <div class="showbox">
+                <div class="imglink">
+                    <a href="#"><img src="images/fukuhara.jpeg"></a>
+                </div>
+                <div class="content">
+                    <h2>Coming Soon...</h2>
+                </div>
+            </div>
+            </div>
+        </div>
+        <!-- Add Pagination -->
+        <!--<div class="swiper-pagination"></div>-->
+    </div>
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+    <script>
+        var swiper = new Swiper('.swiper-container', {
+          effect: 'coverflow',
+          grabCursor: true,
+          centeredSlides: true,
+          slidesPerView: 'auto',
+          coverflowEffect: {
+            rotate: 50,
+            stretch: 0,
+            depth: 200,
+            modifier: 1,
+            slideShadows: true,
+          },
+          loop: false,
+          autoplay: {
+              delay: 1000,
+              disableOnInteraction: true,
+          },
+          /*pagination: {
+            el: '.swiper-pagination',
+          },*/
+        });
+
+        $(document).ready(function() {
+            var mySwiper = document.querySelector('.swiper-container').swiper
+
+            $(".swiper-container").mouseenter(function() {
+                mySwiper.autoplay.stop();
+                console.log('slider stopped');
+            });
+
+            $(".swiper-container").mouseleave(function() {
+                mySwiper.autoplay.start();
+                console.log('slider started again');
+            }); 
+        });
+    </script>
+</body>
+</html>

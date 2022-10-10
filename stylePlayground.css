@@ -1,0 +1,88 @@
+@font-face
+{
+    font-family: arcade;
+    src: url(fonts/PressStart2P-Regular.ttf);
+    font-style: normal;
+    font-weight: 100;
+}
+*
+{
+    margin: 0;
+    padding: 0;
+}
+body 
+{
+    background: #010615; 
+    font-family: arcade;
+    font-size: 20px;
+    color: #000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.swiper-container 
+{
+    width: 100%;
+    padding-top: 100px;
+    padding-bottom: 300px;
+}
+.swiper-slide 
+{
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
+    background: #010615;
+}
+.showbox
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /*margin: 40px;*/
+    transition: 0.5s;
+}
+.showbox .imglink img
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: 0.5s;
+    -webkit-box-reflect: below 2px linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+    z-index: 10000;
+}
+.swiper-slide:hover .showbox .imglink img
+{
+    transform: scaleX(1.8) scaleY(1.2);
+}
+.showbox .content
+{
+    position: absolute;
+    width: 100%;
+    left: 10px;
+    right: 10px;
+    bottom: -20vh;
+    height: 50px;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 0.5s;
+}
+.showbox:hover .content
+{
+    opacity: 1;
+}
+.showbox .content h2
+{
+    font-size: 20px;
+    color: #fff;
+}

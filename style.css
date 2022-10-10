@@ -1,0 +1,410 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+*
+{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body
+{
+    font-family: 'Poppins', sans-serif;
+    background-color: #151515;
+}
+.container
+{
+    max-width: 70rem;
+    padding: 0 2rem;
+    margin: 0 auto;
+}
+
+header
+{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+}
+
+header::after
+{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.05);
+    z-index: 25;
+}
+
+.mountain
+{
+    position: absolute;
+    bottom: -65px;
+    width: 100%;
+    height: 80vh;
+    z-index: 11;
+}
+
+.sky
+{
+    position: absolute;
+    bottom: 500px;
+    top: 0;
+    width: 100%;
+    height: 48vh;
+    z-index: 10;
+}
+
+.big-title
+{
+    position: absolute;
+    z-index: 30;
+    line-height: 4rem;
+    top: calc(50% - 5rem);
+    width: 100%;
+    text-align: center;
+    font-size: 4rem;
+    font-weight: 600;
+    color: #fff;
+}
+
+.bio
+{
+    width: 100%;
+    background-color: #151515;
+    position: relative;
+}
+
+.bio .container
+{
+    padding: 1rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin-bottom: -50vh; /**/
+}
+
+.bio img
+{
+    width: 100%;
+}
+.bio .container > *
+{
+    margin: 2rem;
+}
+
+.bio .content
+{
+    color: #fff;
+    font-size: 1.5rem;
+    transform: translateY(-50px);
+}
+
+.imgContainer
+{
+    transform: translateY(50px);
+}
+
+.title
+{
+    font-weight: 600;
+    font-size: 2rem;
+    margin-bottom: 1rem; 
+    padding-bottom: .5rem;
+    position: relative; 
+}
+
+.title span
+{
+
+    text-transform: uppercase;
+    color: aqua;
+}
+
+.border
+{
+    position: absolute;
+    width: 0%;
+    height: 3px;
+    background-color: #fff;
+    bottom: 0;
+    left: 0;
+}
+
+.bio ul
+{
+    position: relative;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    width: 100%;
+}
+
+.bio ul li
+{
+    list-style: none;
+    width: 33%;
+    height: 50px;
+}
+
+.bio ul li a
+{
+    display: block;
+    background: #151515;
+    color: #fff;
+}
+
+.bio ul li:nth-child(1) a:hover
+{
+    color: rgb(230, 140, 170);
+}
+
+.bio ul li:nth-child(2) a:hover
+{
+    color: rgb(193, 154, 107);
+}
+
+.bio ul li:nth-child(3) a:hover
+{
+    color: rgb(0, 120, 255);
+}
+
+.bio .shadow
+{
+    position: absolute;
+    bottom: 100%;
+    height: 300px;
+    width: 100%;
+    left: 0;
+    z-index: 20;
+    background: linear-gradient(to top, #151515, transparent);
+}
+
+.opacity
+{
+    opacity: 0;
+}
+
+.playground
+{
+    background: #151515;
+    min-height: 100vh;
+}
+
+.playground .transition
+{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.playground .transition .playground-title
+{
+    position: absolute;
+    bottom: 500px;
+    font-size: 2rem;
+    color: #151515;
+    text-transform: uppercase;
+    z-index: 20;
+}
+
+
+.playground .transition .clouds
+{
+    background: linear-gradient(to top, #fff, transparent);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%; /**/
+    z-index: 18; /**/
+}
+
+.playground .transition .clouds img
+{
+    position: absolute;
+    bottom: 10px;
+    max-width: 100%;
+    animation-name: cloud;
+    animation-duration: calc(3s * var(--i));
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes cloud
+{
+    0%
+    {
+        opacity: 0;
+        transform: scale(1);
+    }
+    25%, 75%
+    {
+        opacity: 1;
+    }
+    100%
+    {
+        opacity: 0;
+        transform: scale(3);
+    }
+}
+
+.playground .playground-container
+{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playground .playground-container .swiper-container
+{
+    background: #fff;
+    width: 100%;
+    padding-top: 50px;
+    padding-bottom: 300px;
+}
+
+/*debugged by console : without .swiper-container we can't
+ *override width and height attributes in .swiper-slide
+ *since there is a swiper-slide class in "https://unpkg.com/swiper/swiper-bundle.min.css"
+ */
+ .playground .playground-container .swiper-container .swiper-slide
+{
+    background-position: center;
+    background-size: cover;
+    width: 300px;
+    height: 300px;
+    background: black;
+}
+
+.showbox
+{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.imgLink img
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10000;
+    -webkit-box-reflect: below 2px linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+    transition: 0.5s;
+}
+
+.imgLink:hover img
+{
+    transform: scaleX(1.8) scaleY(1.2);
+}
+
+.showbox .content
+{
+    position: absolute;
+    width: 100%;
+    bottom: -100px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.showbox .content h2
+{
+    font-size: 2rem;
+    font-weight: 600;
+    color: #000;
+}
+
+.showbox:hover .content{
+    opacity: 1;
+}
+
+@media (max-width: 850px)
+{
+    .big-title
+    {
+        font-size: 3rem;
+    }
+        .bio .container
+    {
+        grid-template-columns: 1fr;
+    }
+
+    .playground .transition .playground-title
+    {
+        opacity: 0;
+    }
+
+    .playground .transition .clouds
+    {
+        height: 10%;
+    }
+
+    .playground .playground-container .swiper-container .swiper-slide
+    {
+        width: 200px;
+        height: 200px;
+    }
+
+    .bio .container
+    {
+        margin-bottom: -15vh; /**/
+    }
+
+    .showbox .content h2
+    {
+        font-size: 1rem;
+    }
+
+    .imgLink:hover img
+    {
+        transform: scaleX(1) scaleY(1);
+    }
+}
+
+@media (max-width: 600px)
+{
+    .big-title
+    {
+        font-size: 2rem;
+    }
+
+    .text
+    {
+        font-size: 1rem;
+    }
+
+    .title
+    {
+        font-size: 1.2rem;
+    }
+
+    .mountain
+    {
+        bottom: -55px;
+    }
+
+    .bio .container
+    {
+        margin-bottom: -25vh; /**/
+    }
+}

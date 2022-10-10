@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zhenhuan Sun</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="icon.gif">
+</head>
+<body>
+    <!--All of the <section> element will be styled equally according to the .steven style definition-->
+    <section class="steven" id="sec">
+        <header>
+            <a href="#" class="logo">
+                <div class="wavy">
+                    <span style="--i:1">H</span>
+                    <span style="--i:2">u</span>
+                    <span style="--i:3">a</span>
+                    <span style="--i:4">n</span>
+                </div>
+            </a>
+            <div id="menu" onclick="toggle()"></div>
+        </header>
+        <div class="content">
+            <h2>Hello World, <br><br>I'm <span>Zhenhuan Sun</span></h2>
+            <p></p>
+            <a href="#">Know More</a>
+        </div>
+    </section>
+    <div id="navigation">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="Playground.html">Playground</a></li>
+            <li><a href="About.html">About me</a></li>
+        </ul>
+    </div>
+    <script type="text/javascript">
+        function toggle()
+        {
+            var sec = document.getElementById('sec');
+            var navigation = document.getElementById('navigation')
+            sec.classList.toggle('active'); // toggle between the class name
+            navigation.classList.toggle('active'); // toggle between the class name
+        }
+    </script>
+</body>
+</html>
+
+=======================================================================================
+
+@font-face
+{
+    font-family: 'arcade';
+    src: url(fonts/PressStart2P-Regular.ttf);
+    font-style: normal;
+    font-weight: 100;
+}
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: arcade;
+}
+header
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 40px 100px;
+    z-index: 10000;
+    transition: 1s;
+}
+/* style all elements with the class name logo*/
+header .logo
+{
+    position: relative;
+    font-weight: 100;
+    color: floralwhite;
+    text-decoration: none;
+    font-size: 2em;         /*2 times the size of the current font*/
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: 2s;
+}
+header .logo .wavy
+{
+    position: relative;
+    -webkit-box-reflect: below -10px linear-gradient(transparent, rgba(0, 0, 0, 0.5));
+}
+header .logo .wavy span
+{
+    position: relative;
+    display: inline-block;
+    animation-name: animate;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    transition-timing-function: ease-in-out;
+    animation-delay: calc(0.1s * var(--i));  /*Change delay time*/
+}
+@keyframes animate
+{
+    0%
+    {
+        transform: translateY(0px);
+    }
+    20%
+    {
+        transform: translateY(-20px);
+    }
+    40%,100%
+    {
+        transform: translateY(0px);
+    }
+}
+/*style the element with the id menu*/
+header #menu
+{
+    position: relative;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+header #menu::before
+{
+    content: '';
+    position: absolute;
+    top: 10px;
+    width: 100%;
+    background: floralwhite;
+    height: 2px;
+}
+header #menu::after
+{
+    content: '';
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    background: floralwhite;
+    height: 2px;
+}
+/*style all element with steven and also have active*/
+.steven.active header #menu::before
+{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+}
+.steven.active header #menu::after
+{
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+}
+.steven
+{
+   position: relative; 
+   width: 100%;
+   padding: 100px;
+   min-height: 100vh;
+   background: url(images/SpaceWallpaper3840x1344.png);
+   background-size: cover;
+   display: flex;
+   align-items: center;
+   transition: 1s;  /*every time when we enter or exit this block there will be 1 sec deay*/
+   z-index: 2;      /*An element with greater stack order is always in front of an element with a lower stack oreder*/
+}
+/*******/
+/*.container
+{
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background: url(images/SpaceWallpaper3840x1344.png);
+    background-attachment: fixed;
+}
+.mixBlnd
+{
+	background-blend-mode: screen;
+}*/
+/*******/
+.steven.active
+{
+    transform: translateX(-400px);
+}
+#navigation
+{
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 400px;
+    height: 100vh;
+    background: url(images/stars.gif);
+    background-size: cover;
+    z-index: 1;     /*An element with greater stack order is always in front of an element with a lower stack oreder*/
+    display: grid;
+    align-items: center;      /*vertically*/
+    justify-content: center;  /*horizontally*/
+    transition: 1s;
+}
+#navigation.active
+{
+    right: 0;
+}
+#navigation ul
+{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+#navigation ul li
+{
+    list-style: none;
+    margin-bottom: 4em;
+}
+#navigation ul li a
+{
+    color: floralwhite;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 2em;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.content
+{
+    max-width: 1000px;
+}
+.content br
+{
+    margin: 10px;
+}
+.content h2{
+    color: floralwhite;
+    font-size: 2.5em;
+}
+.content h2 span
+{
+    color: #40c3ff;
+    font-size: 1.2em;
+}
+.content a
+{
+    position: relative;
+    display: inline-block;
+    margin-top: 50px;
+    background: floralwhite;
+    color: black;
+    padding: 10px 30px;
+    text-decoration: none;
+    font-size: 1.2em;
+    font-weight: 500;
+}
+@media (max-width: 750px)
+{
+    header
+    {
+        padding: 20px 50px;
+    }
+    .steven
+    {
+        padding: 100px 50px 150px;
+    }
+    .steven h2
+    {
+        font-size: 1.8em;
+    }
+    .steven a
+    {
+        font-size: 0.8em
+    }
+    .steven.active
+    {
+        transform: translateX(-250px);
+    }
+    #navigation
+    {
+        width: 250px;
+    }
+    #navigation ul li a
+    {
+        font-size: 1.2em;
+    }
+}
+/*@media (min-width: 1300px)
+{
+    .steven
+    {
+        background-size: cover;
+    }
+}*/
