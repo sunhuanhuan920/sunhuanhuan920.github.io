@@ -11,6 +11,7 @@ body
 {
     font-family: 'Poppins', sans-serif;
     background-color: #151515;
+    overflow-x: hidden;
 }
 .container
 {
@@ -95,7 +96,7 @@ header::after
 }
 .bio .container > *
 {
-    margin: 2rem;
+    margin: -2rem; /* indirectly controls text alignment */
 }
 
 .bio .content
