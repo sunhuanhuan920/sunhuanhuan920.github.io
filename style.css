@@ -176,7 +176,7 @@ header::after
 
 .bio .shadow
 {
-    position: absolute;
+    position: relative;
     bottom: 100%;
     height: 300px;
     width: 100%;
